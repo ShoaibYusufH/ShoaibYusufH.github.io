@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Font‑Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- AOS Animation library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <title>Shoaib Yusuf H – Portfolio</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      background-color: #000000;
+      overflow-x: hidden;
+    }
+
+    nav {
+      width: 100%;
+      height: 10vh;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #000000;
+    }
+
+    .nav-container {
+      width: 90%;
+      max-width: 1200px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      color: white;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #e70808;
+      text-shadow: 0 0 10px #e70808;
+    }
+
+    .hamburg,
+    .cancel {
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      display: none;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      z-index: 1001;
+    }
+
+    .nav-container .links {
+      display: flex;
+      gap: clamp(15px, 3vw, 40px);
+    }
+
+    .nav-container .links a {
+      position: relative;
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      color: white;
+      text-decoration: none;
+      font-weight: 550;
+      transition: 0.3s linear;
+      padding: 5px 0;
+    }
+
+    .nav-container .links a::before {
+      position: absolute;
+      content: "";
+      bottom: -3px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background-color: #30C0E8;
+      transition: 0.2s linear;
+    }
+
+    .nav-container .links a:hover::before {
+      width: 100%;
+    }
+
+    .nav-container .links a:hover {
+      color: #30C0E8;
+    }
+
+    .dropdown {
+      z-index: 100;
+      position: absolute;
+      top: 0;
+      transform: translateY(-500px);
+      width: 100%;
+      height: auto;
+      backdrop-filter: blur(4px) brightness(40%);
+      box-shadow: 0 0 20px black;
+      transition: 0.2s linear;
+    }
+
+    .dropdown .links {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .dropdown .links a {
+      display: flex;
+      color: white;
+      text-decoration: none;
+      justify-content: center;
+      padding: 20px 0;
+      align-items: center;
+      transition: 0.2s linear;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown .links a:hover {
+      background-color: #30C0E8;
+      color: black;
+    }
+
+    section {
+      width: 100%;
+      min-height: 90vh;
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px);
+    }
+
+    .flex.flex-wrap.justify-center.md\:justify-start.gap-4 a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.75rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(48, 192, 232, 0.25);
+      color: #30C0E8;
+      background-color: transparent;
+      text-decoration: none;
+      transition: all 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 0 transparent;
+      height: 2.75rem;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Hover animation */
+    .flex.flex-wrap.justify-center.md\:justify-start.gap-4 a:hover {
+      background-color: rgba(48, 192, 232, 0.1);
+      border-color: #30C0E8;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(48, 192, 232, 0.3);
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    /* SVG Icon inside the button */
+    .flex.flex-wrap.justify-center.md\:justify-start.gap-4 a svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      color: #30C0E8;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .flex.flex-wrap.justify-center.md\:justify-start.gap-4 a {
+      margin-right: 1rem;
+      /* fallback in case gap doesn't work */
+      margin-bottom: 1rem;
+    }
+
+    /* No extra margin on last button */
+    .flex.flex-wrap.justify-center.md\:justify-start.gap-4 a:last-child {
+      margin-right: 0;
+    }
+
+    /* Icon on hover */
+    .flex.flex-wrap.justify-center.md\:justify-start.gap-4 a:hover svg {
+      color: #ffffff;
+      transform: scale(1.15);
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: clamp(20px, 5vw, 60px);
+    }
+
+    .main-container .image {
+      width: clamp(250px, 40vw, 400px);
+      height: clamp(300px, 50vw, 500px);
+      background-image: url('assets/ShoaibYusufH.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: none;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .main-container .content {
+      color: white;
+      flex: 1;
+      min-height: 100px;
+    }
+
+    .content h1 {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
+
+    .content h1 span {
+      color: #30C0E8;
+      text-shadow: 0 0 10px #30C0E8;
+    }
+
+    .content .typewriter {
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .content .typewriter-text {
+      color: #30C0E8;
+      text-shadow: 0 0 10px #30C0E8;
+    }
+
+    .content p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      display: flex;
+      gap: clamp(10px, 3vw, 20px);
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .social-links i {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: clamp(2.5rem, 6vw, 3rem);
+      height: clamp(2.5rem, 6vw, 3rem);
+      background-color: transparent;
+      border: 0.2rem solid #30C0E8;
+      border-radius: 50%;
+      color: #30C0E8;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      transition: 0.2s linear;
+    }
+
+    .social-links i:hover {
+      scale: 1.1;
+      color: black;
+      background-color: #30C0E8;
+      filter: drop-shadow(0 0 10px #30C0E8);
+    }
+
+    .content button {
+      width: clamp(150px, 40%, 200px);
+      height: clamp(45px, 8vw, 60px);
+      margin: 30px 0;
+      background-color: #30C0E8;
+      color: white;
+      border: none;
+      outline: none;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      font-weight: 700;
+      border-radius: 5px;
+      transition: 0.2s linear;
+      cursor: pointer;
+    }
+
+    .content button:hover {
+      scale: 1.05;
+      color: #30C0E8;
+      border: 2px solid #30C0E8;
+      background-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 0 40px #30C0E8;
+    }
+
+    /* Skills Section Styles */
+    #skills {
+      background: linear-gradient(145deg, #000000, #000000);
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px);
+    }
+
+    .skills-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .skills-container h2 {
+      color: white;
+      font-size: clamp(2rem, 6vw, 2.5rem);
+      margin-bottom: clamp(30px, 6vw, 50px);
+      position: relative;
+    }
+
+    .skills-container h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(60px, 15vw, 80px);
+      height: 4px;
+      background: linear-gradient(90deg, #30C0E8, #30C0E8);
+      border-radius: 2px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(20px, 4vw, 30px);
+      margin-top: clamp(40px, 8vw, 60px);
+    }
+
+    .skill-card {
+      background: linear-gradient(145deg, #1b2d38, #11202b);
+      border-radius: 20px;
+      padding: clamp(20px, 4vw, 30px);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(59, 186, 156, 0.1);
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(25, 214, 232, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .skill-card:hover::before {
+      left: 100%;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(48, 192, 232, 0.3);
+      border-color: #30C0E8;
+    }
+
+    .skill-icon {
+      font-size: clamp(2rem, 6vw, 3rem);
+      color: #30C0E8;
+      margin-bottom: 20px;
+      display: block;
+      transition: all 0.4s ease;
+    }
+
+    .skill-card:hover .skill-icon {
+      transform: rotateY(360deg) scale(1.1);
+      text-shadow: 0 0 20px #30C0E8;
+    }
+
+    .skill-card h3 {
+      color: white;
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .skill-card p {
+      color: #b8bcc8;
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .skill-level {
+      background: #1a1d2e;
+      border-radius: 10px;
+      padding: 2px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 8px;
+      background: linear-gradient(90deg, #30C0E8, #3EDFEF);
+      border-radius: 8px;
+      transition: all 1.5s ease;
+      width: 0%;
+      position: relative;
+    }
+
+    .skill-progress::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .skill-percentage {
+      color: #30C0E8;
+      font-size: clamp(0.7rem, 2vw, 0.8rem);
+      font-weight: 600;
+      text-align: right;
+      margin-top: 5px;
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .skill-card:nth-child(odd) {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .skill-card:nth-child(even) {
+      animation: float 6s ease-in-out infinite reverse;
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(135deg, #000000 0%, #000000 100%);
+      color: white;
+      text-align: center;
+    }
+
+    #about h2 {
+      font-size: clamp(2rem, 6vw, 2.5rem);
+      margin-bottom: clamp(20px, 4vw, 30px);
+      color: white;
+    }
+
+    #about p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #b8bcc8;
+    }
+
+    /* Flip Card Container */
+    .flip-card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    /* Individual Flip Card */
+    .flip-card {
+      background-color: transparent;
+      width: 250px;
+      height: 180px;
+      perspective: 1000px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Front and Back */
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      backface-visibility: hidden;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      box-shadow: 0 6px 20px rgba(48, 192, 232, 0.15);
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .flip-card-front {
+      background-color: #30C0E8;
+    }
+
+    .flip-card-back {
+      background-color: #1b2b35;
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front {
+      background: linear-gradient(135deg, #123747, #1f8eb9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flip-card-front h3 {
+      margin: 0;
+    }
+
+    .icon-large {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Highlights Section */
+    #highlights {
+      background: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
+      color: white;
+      padding: 4rem 1rem;
+    }
+
+    #highlights h2 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 3rem;
+      text-align: center;
+      color: #ffffff;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* Wrapper Grid */
+    .highlights-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: clamp(20px, 4vw, 30px);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Individual Card */
+    .highlight-card {
+      background: linear-gradient(145deg, #1b2b35, #1a3442);
+      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 1.2rem;
+      text-align: center;
+      transition: all 0.35s ease;
+      border: 1px solid rgba(48, 192, 232, 0.15);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 36px rgba(48, 192, 232, 0.3);
+      border-color: #38BDF8;
+    }
+
+    /* Icon Styling */
+    .highlight-card i {
+      display: block;
+      text-align: center;
+      font-size: 2.4rem;
+      margin: 0 auto 16px;
+      color: #30C0E8;
+      transition: transform 0.3s ease;
+    }
+
+    .highlight-card:hover i {
+      transform: scale(1.15);
+    }
+
+    /* Headings & Text */
+    .highlight-card h3 {
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+      font-weight: 600;
+    }
+
+    .highlight-card p {
+      color: #b8bcc8;
+      line-height: 1.6;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      margin-bottom: 0;
+    }
+
+    /* Highlight List */
+    .highlight-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .highlight-list li {
+      margin-bottom: 12px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: #b8bcc8;
+      line-height: 1.5;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .highlight-list li::before {
+      /* content: "⟡"; */
+      font-size: 0.75rem;
+      color: #30C0E8;
+      position: absolute;
+      left: 0;
+      top: 4px;
+    }
+
+    /* Hyperlink Style */
+    .highlight-list li a {
+      color: #30C0E8;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(48, 192, 232, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .highlight-list li a:hover {
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+    }
+
+    @media screen and (min-width: 768px) {
+      .highlights-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Contact Section */
+    #contact {
+      background: linear-gradient(135deg, #000000 0%, #000000 100%);
+      color: white;
+      text-align: center;
+    }
+
+    #contact h2 {
+      font-size: clamp(2rem, 6vw, 2.5rem);
+      margin-bottom: clamp(20px, 4vw, 30px);
+      color: white;
+    }
+
+    #contact p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: #b8bcc8;
+      margin-bottom: clamp(20px, 4vw, 30px);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .contact-link {
+      color: #30C0E8;
+      text-decoration: none;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: 1px solid transparent;
+    }
+
+    .contact-link:hover {
+      color: white;
+      text-shadow: 0 0 10px #30C0E8;
+      border-color: #30C0E8;
+      background: rgba(48, 192, 232, 0.1);
+    }
+
+    /* Responsive Breakpoints */
+
+    /* Large tablets and small desktops */
+    @media (max-width: 1024px) {
+      .nav-container {
+        width: 95%;
+      }
+
+      .main-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+
+      .main-container .image {
+        width: clamp(200px, 50vw, 350px);
+        height: clamp(250px, 60vw, 400px);
+      }
+
+      .main-container .content {
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .highlights-wrapper {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+    }
+
+    /* Medium tablets */
+    @media (max-width: 768px) {
+      .nav-container .links {
+        display: none;
+      }
+
+      .hamburg,
+      .cancel {
+        display: block;
+      }
+
+      section {
+        min-height: auto;
+        padding: clamp(30px, 6vw, 60px) clamp(15px, 4vw, 30px);
+      }
+
+      .main-container .image {
+        width: clamp(180px, 60vw, 300px);
+        height: clamp(220px, 70vw, 350px);
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .highlights-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-links {
+        gap: 20px;
+      }
+    }
+
+    /* Small tablets and large phones */
+    @media (max-width: 600px) {
+      .nav-container {
+        padding: 0 15px;
+      }
+
+      .main-container .image {
+        width: 85vw;
+        max-width: 300px;
+        height: 50vw;
+        max-height: 250px;
+      }
+
+      .content p {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+      }
+
+      .social-links {
+        gap: 15px;
+      }
+
+      .skill-card {
+        padding: 20px;
+      }
+
+      .service-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Small phones */
+    @media (max-width: 480px) {
+      .nav-container {
+        padding: 0 10px;
+      }
+
+      .hamburg,
+      .cancel {
+        right: 15px;
+        font-size: 1.5rem;
+      }
+
+      .main-container .image {
+        width: 90vw;
+        height: 40vw;
+        min-height: 200px;
+        max-height: 220px;
+      }
+
+      .skills-container h2::after {
+        width: 50px;
+      }
+
+      .skill-card {
+        padding: 15px;
+      }
+
+      .service-card {
+        padding: 1.2rem;
+      }
+
+      .contact-links {
+        padding: 0 10px;
+      }
+
+      .contact-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 360px) {
+      .main-container .image {
+        height: 35vw;
+        min-height: 180px;
+      }
+
+      .social-links {
+        gap: 10px;
+      }
+
+      .social-links i {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1rem;
+      }
+
+      .skill-card {
+        padding: 12px;
+      }
+
+      .service-card {
+        padding: 1rem;
+      }
+    }
+
+    /* Landscape orientation for phones */
+    @media (max-height: 500px) and (orientation: landscape) {
+      section {
+        min-height: auto;
+        padding: 30px 20px;
+      }
+
+      .main-container {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .main-container .image {
+        width: 200px;
+        height: 250px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ──────────────────── NAVIGATION ──────────────────── -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+        &lt;Shoaib/&gt;
+      </div>
+      <div class="links">
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="#home">Home</a>
+        </div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="#about">About</a>
+        </div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="#skills">Skills</a>
+        </div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a
+            href="#highlights">Highlights</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a
+            href="#contact">Contact</a></div>
+      </div>
+      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+    </div>
+    <!-- Mobile dropdown -->
+    <div class="dropdown">
+      <div class="links">
+        <a href="#home" onclick="cancel()">Home</a>
+        <a href="#about" onclick="cancel()">About</a>
+        <a href="#skills" onclick="cancel()">Skills</a>
+        <a href="#highlights" onclick="cancel()">Highlights</a>
+        <a href="#contact" onclick="cancel()">Contact</a>
+        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ──────────────────── HERO / HOME SECTION ──────────────────── -->
+  <section id="home">
+    <div class="main-container">
+      <!-- Left: Textual content -->
+      <div class="content">
+        <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">
+          Hey, I'm <span>Shoaib Yusuf H</span>
+        </h1>
+        <div class="typewriter" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">
+          I'm a <span class="typewriter-text"></span><label>|</label>
+        </div>
+        <p data-aos="flip-down" data-aos-duration="1500" data-aos-delay="1100">
+          Passionate Software Engineer at <strong>Blueocean Digital India</strong> with a
+          knack for building intuitive web experiences and scalable cloud solutions.
+          Always learning—currently deep‑diving into distributed systems and AI‑powered
+          interfaces.
+        </p>
+        <br />
+      
+        <div class="flex flex-wrap justify-center md:justify-start gap-4" data-aos="fade-up" data-aos-delay="100"
+          data-aos-duration="800"><a target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:text-accent-foreground h-11 rounded-md px-8 hover:bg-primary/10 hover:border-primary"
+            href="https://github.com/ShoaibYusufH"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-github mr-2 h-5 w-5">
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+              </path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>GitHub</a><a target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:text-accent-foreground h-11 rounded-md px-8 hover:bg-primary/10 hover:border-primary"
+            href="https://www.linkedin.com/in/shoaibyusufh"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-linkedin mr-2 h-5 w-5">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect width="4" height="12" x="2" y="9"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>LinkedIn</a><a target="_blank" download=""
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:text-accent-foreground h-11 rounded-md px-8 hover:bg-primary/10 hover:border-primary"
+            href="assets/Shoaib Yusuf H:Curriculum_Vitae.pdf"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-download mr-2 h-5 w-5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" x2="12" y1="15" y2="3"></line>
+            </svg>Download CV</a></div>
+      </div>
+
+      <!-- Right: Hero image -->
+      <div class="image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="900"></div>
+    </div>
+  </section>
+
+  <!-- ──────────────────── ABOUT SECTION ──────────────────── -->
+
+  <section id="about">
+    <div class="main-container" style="display: flex; flex-direction: column; text-align: center;">
+      <h2 data-aos="fade-down" data-aos-duration="800">About Me</h2>
+      <p data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+        I’m a <strong>Software Engineer</strong> with 2+ years of experience building scalable backend systems across
+        the <strong>Telecom</strong>, <strong>EV</strong>, and <strong>IoT</strong> domains. I work primarily with
+        <strong>Golang</strong>, focusing on microservices, real-time protocols like <strong>OCPP</strong>,
+        <strong>Diameter</strong>,
+        <strong>Radius</strong>, <strong>Nchf</strong> and building protocol-compliant gateways.
+      </p>
+
+      <div class="flip-card-container">
+
+        <!-- Work Experience Card -->
+        <div class="flip-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="200">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <i class="fa-solid fa-briefcase icon-large"></i>
+              <h3>Work Experience</h3>
+            </div>
+            <div class="flip-card-back">
+              <p><strong>Software Engineer</strong><br>2022 – Present<br>BlueoceanDigital India Private Limited
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- UG Education Card -->
+        <div class="flip-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="400">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <i class="fa-solid fa-graduation-cap icon-large"></i>
+              <h3>UG Education</h3>
+            </div>
+            <div class="flip-card-back">
+              <p><strong>B.E. EEE</strong><br>2018 – 2022<br>Sri Ramakrishna Engineering College</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schooling Card -->
+        <div class="flip-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="600">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <i class="fa-solid fa-building-columns icon-large"></i>
+              <h3>Schooling</h3>
+            </div>
+            <div class="flip-card-back">
+              <p><strong>Until 2018</strong><br>Lisieux Matriculation Higher Secondary School</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────── SKILLS SECTION ──────────────────── -->
+  <section id="skills">
+    <div class="skills-container">
+      <h2 data-aos="fade-up" data-aos-duration="1000">Core Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <i class="fa-solid fa-code skill-icon"></i>
+          <h3>Backend Development</h3>
+          <p>
+            Building scalable backend services and APIs using <strong>Go (Golang)</strong>. Experienced in RESTful and
+            <strong>gRPC</strong> APIs, <strong>API Gateway</strong> integrations, and event-driven systems with
+            <strong>Apache Kafka</strong>. Also proficient with <strong>WebSocket</strong>, <strong>GraphQL</strong>,
+            and <strong>Webhook</strong> communication patterns.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="80"></div>
+          </div>
+          <div class="skill-percentage">Golang, Kafka, API Gateways, gRPC - 80%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+          <i class="fa-solid fa-network-wired skill-icon"></i>
+          <h3>Telecom Protocols & Packet Analysis</h3>
+          <p>
+            Hands-on experience with <strong>Diameter</strong>, <strong>Radius</strong>, and <strong>Nchf GW</strong>
+            <strong>AAA</strong> protocols based on <strong>3GPP specifications</strong>. Worked on <strong>Convergent
+              Charging systems</strong> for both <strong>4G and 5G</strong> networks. Proficient in analyzing network
+            packets using <strong>Wireshark</strong>.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="80"></div>
+          </div>
+          <div class="skill-percentage">Diameter, Radius, Nchf GW - 80%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
+          <i class="fa-solid fa-charging-station skill-icon"></i>
+          <h3>EV Charging Protocols & CSMS</h3>
+          <p>
+            Experience in implementing <strong>OCPP 1.6</strong> and <strong>OCPP 2.0.1</strong> for electric vehicle
+            charging infrastructure. Developed and maintained <strong>CSMS (Charging Station Management System)</strong>
+            for real-time communication with charging stations.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="80"></div>
+          </div>
+          <div class="skill-percentage">OCPP 1.6 & 2.0.1, CSMS - 80%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+          <i class="fa-solid fa-database skill-icon"></i>
+          <h3>Database Management</h3>
+          <p>
+            Experienced in working with <strong>MongoDB</strong>, including designing collections, writing complex
+            aggregation queries, and implementing record-level <strong>caching strategies</strong> for performance
+            optimization.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="75"></div>
+          </div>
+          <div class="skill-percentage">MongoDB - 75%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
+          <i class="fa-solid fa-credit-card skill-icon"></i>
+          <h3>Payment & Subscription Systems</h3>
+          <p>
+            Integrated payment solutions using <strong>Stripe</strong> and <strong>Razorpay SDKs</strong>. Experienced
+            in implementing <strong>subscription models</strong>, <strong>usage-based billing</strong>, and
+            <strong>customer pricing management</strong> for SaaS platforms.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="75"></div>
+          </div>
+          <div class="skill-percentage">Stripe, Razorpay, Charging, Billing Systems - 75%</div>
+        </div>
+
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <i class="fa-solid fa-vial skill-icon"></i>
+          <h3>Automation & Manual Testing</h3>
+          <p>
+            Proficient in automation testing using <strong>BDD (Cucumber)</strong> and <strong>Cypress</strong>, along
+            with manual API testing using <strong>Postman</strong>. Also experienced in <strong>Diameter Gateway
+              testing</strong> using the <strong>Seagull tool</strong> for protocol simulation.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="80"></div>
+          </div>
+          <div class="skill-percentage">BDD, Cypress, Postman, Seagull - 80%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+          <i class="fa-brands fa-docker skill-icon"></i>
+          <h3>Containerization & Orchestration</h3>
+          <p>
+            Experience in building and deploying containerized applications using <strong>Docker</strong> and managing
+            scalable infrastructure with <strong>Kubernetes</strong>.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="70"></div>
+          </div>
+          <div class="skill-percentage">Docker & Kubernetes - 70%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+          <i class="fa-solid fa-infinity skill-icon"></i>
+          <h3>DevOps & CI/CD</h3>
+          <p>
+            Experience in automating build and deployment pipelines using <strong>GitHub Actions</strong> and managing
+            continuous delivery workflows with <strong>Argo CD</strong>. Also proficient in system monitoring and
+            dashboard creation using <strong>Grafana</strong>.
+          </p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="65"></div>
+          </div>
+          <div class="skill-percentage">GitHub Actions, Argo CD, Grafana - 65%</div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <i class="fa-brands fa-html5 skill-icon"></i>
+          <h3>Frontend Technologies</h3>
+          <p>Building responsive and interactive user interfaces with modern web technologies</p>
+          <div class="skill-level">
+            <div class="skill-progress" data-skill="60"></div>
+          </div>
+          <div class="skill-percentage">HTML5 / CSS3 / JavaScript - 60%</div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────── HIGHLIGHTS SECTION ──────────────────── -->
+  <section id="highlights">
+    <div class="main-container" style="flex-direction: column;">
+      <h2 data-aos="fade-up" data-aos-duration="1000">Certifications, Publications & Projects</h2>
+      <div class="highlights-wrapper">
+        <!-- Certifications -->
+        <div class="highlight-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="150">
+          <i class="fa-solid fa-award" style="color:#30C0E8;"></i>
+          <h3>Certifications</h3>
+          <ul class="highlight-list">
+            <li><a href="https://www.udemy.com/certificate/UC-9b8ef5d0-6246-45ef-82bb-97da33e91290/" target="_blank">Go
+                Bootcamp - Golang Mastery</a></li>
+            <li><a href="https://www.udemy.com/certificate/UC-d4593e77-a7e8-4a2f-9022-b0d80bea9e14/"
+                target="_blank">MongoDB Developer’s Guide</a></li>
+            <li><a href="https://www.udemy.com/certificate/UC-f873cd14-985e-4baa-97fc-906efd0e7d6e/"
+                target="_blank">Docker & Kubernetes</a></li>
+            <li><a href="https://www.udemy.com/certificate/UC-0a9983bc-fa59-4f06-bbae-aafac941e646/"
+                target="_blank">gRPC [Golang]</a></li>
+
+          </ul>
+        </div>
+
+
+        <!-- Publications -->
+        <div class="highlight-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+          <i class="fa-solid fa-book-open fa-2x" style="color:#30C0E8;"></i>
+          <h3>Publications</h3>
+          <p>
+            Research contribution presented at an international conference and published by Springer in the field of
+            electric vehicle systems.
+          </p>
+          <ul class="highlight-list">
+            <li>
+              <a href="https://link.springer.com/chapter/10.1007/978-981-99-7962-2_28" target="_blank">
+                Uniform SOC Maintenance for 4WD Electric Vehicles
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Professional Projects -->
+        <div class="highlight-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="450">
+          <i class="fa-solid fa-briefcase fa-2x" style="color:#30C0E8;"></i>
+          <h3>Professional Projects</h3>
+          <ul class="highlight-list">
+            <li>CSMS for EV Charging using OCPP Protocols.</li>
+            <li>Subscription and Usage based Billing System.</li>
+            <li>Developed convergent charging gateways for 3G/4G/5G using AAA protocols, aligned with 3GPP
+              specifications.</li>
+          </ul>
+        </div>
+
+        <!-- Academic Projects -->
+        <div class="highlight-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="600">
+          <i class="fa-solid fa-graduation-cap fa-2x" style="color:#30C0E8;"></i>
+          <h3>Academic Projects</h3>
+          <ul class="highlight-list">
+            <li>Uniform SOC Maintenance for 4WD Electric Vehicles</li>
+            <li>Gas Leakage Detection and Alert System</li>
+            <li>Pesticide Spraying Robot</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────── CONTACT SECTION ──────────────────── -->
+  <section id="contact">
+    <div class="main-container" style="flex-direction: column; text-align:center;">
+      <h2 data-aos="fade-up" data-aos-duration="1000">Contact Me</h2>
+      <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+        Open to new collaborations and conversations — drop a message! </p>
+      <div class="contact-links" style="margin-top:1.5rem;">
+        <a href="mailto:shoaibyusuf15@gmail.com" class="contact-link" data-aos="fade-right" data-aos-duration="800"><i
+            class="fa-solid fa-envelope"></i> shoaibyusuf15@gmail.com</a>
+        <br />
+        <a href="https://www.linkedin.com/in/shoaibyusufh" target="_blank" class="contact-link" data-aos="fade-right"
+          data-aos-duration="800" data-aos-delay="100">
+          <i class="fa-brands fa-linkedin"></i> linkedin.com/in/shoaibyusuf
+        </a>
+        <br />
+        <a href="tel:+919361434884" class="contact-link" data-aos="fade-right" data-aos-duration="800"
+          data-aos-delay="100"><i class="fa-solid fa-phone"></i> +91 93614 34884</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────── SCRIPTS ──────────────────── -->
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({ offset: 0 });
+
+    // Mobile menu handlers
+    function hamburg() {
+      document.querySelector('.dropdown').style.transform = 'translateY(0)';
+    }
+    function cancel() {
+      document.querySelector('.dropdown').style.transform = 'translateY(-500px)';
+    }
+
+    // ────────────── TYPEWRITER EFFECT ──────────────
+    const texts = ['Software Engineer', 'Backend Developer', 'Full‑Stack Developer'];
+    let speed = 100;
+    const textElements = document.querySelector('.typewriter-text');
+    let textIndex = 0;
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (charIndex < texts[textIndex].length) {
+        textElements.innerHTML += texts[textIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, speed);
+      } else {
+        setTimeout(eraseText, 1200);
+      }
+    }
+
+    function eraseText() {
+      if (textElements.innerHTML.length > 0) {
+        textElements.innerHTML = textElements.innerHTML.slice(0, -1);
+        setTimeout(eraseText, 50);
+      } else {
+        textIndex = (textIndex + 1) % texts.length;
+        charIndex = 0;
+        setTimeout(typeWriter, 400);
+      }
+    }
+
+    // Animate skill progress bars when they come into view
+    function animateSkillBars() {
+      const skillProgressBars = document.querySelectorAll('.skill-progress');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const skillLevel = entry.target.getAttribute('data-skill');
+            entry.target.style.width = skillLevel + '%';
+          }
+        });
+      }, { threshold: 0.5 });
+
+      skillProgressBars.forEach(bar => {
+        observer.observe(bar);
+      });
+    }
+
+    window.onload = function () {
+      typeWriter();
+      animateSkillBars();
+    };
+  </script>
+</body>
+
+</html>
