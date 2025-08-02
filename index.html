@@ -225,6 +225,20 @@
       flex-shrink: 0;
     }
 
+    .main-container .image-container {
+      width: clamp(250px, 40vw, 400px);
+      flex-shrink: 0;
+    }
+
+    .profile-image {
+      width: 100%;
+      height: auto;
+      /* Maintains aspect ratio */
+      border-radius: 10px;
+      object-fit: cover;
+      /* or object-fit: contain */
+    }
+
     .main-container .content {
       color: white;
       flex: 1;
@@ -981,7 +995,7 @@
           interfaces.
         </p>
         <br />
-      
+
         <div class="flex flex-wrap justify-center md:justify-start gap-4" data-aos="fade-up" data-aos-delay="100"
           data-aos-duration="800"><a target="_blank" rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:text-accent-foreground h-11 rounded-md px-8 hover:bg-primary/10 hover:border-primary"
@@ -1002,8 +1016,8 @@
               <circle cx="4" cy="4" r="2"></circle>
             </svg>LinkedIn</a><a target="_blank" download=""
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:text-accent-foreground h-11 rounded-md px-8 hover:bg-primary/10 hover:border-primary"
-            href="assets/CurriculumVitae_ShoaibYusuf.pdf"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-              height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            href="assets/CurriculumVitae_ShoaibYusuf.pdf"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" class="lucide lucide-download mr-2 h-5 w-5">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
@@ -1012,7 +1026,9 @@
       </div>
 
       <!-- Right: Hero image -->
-      <div class="image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="900"></div>
+      <div class="image-container" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="900">
+        <img src="assets/ShoaibYusufH.jpg" alt="Shoaib Yusuf H" class="profile-image">
+      </div>
     </div>
   </section>
 
